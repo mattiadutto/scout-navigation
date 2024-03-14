@@ -15,13 +15,13 @@ from nav2_common.launch import ReplaceString, RewrittenYaml
 def generate_launch_description():
     # Specify the name of the package
     pkg_name = "scout_navigation"
-    namespace = "scout_mini"
+    namespace = ""
 
     config_file_dir = os.path.join(get_package_share_directory(pkg_name), "config")
 
     # Arguments and parameters
-    use_sim_time = LaunchConfiguration("use_sim_time", default="true")
-    map_name = LaunchConfiguration("map_name", default="workshop_big_cartographer.yaml")
+    use_sim_time = LaunchConfiguration("use_sim_time", default="false")
+    map_name = LaunchConfiguration("map_name", default="slam_lab_dock.yaml")
 
     declare_use_sim_time_arg = DeclareLaunchArgument(
         "use_sim_time",
@@ -41,7 +41,7 @@ def generate_launch_description():
 
     namespaced_nav2_params = ReplaceString(
         source_file=os.path.join(config_file_dir, "nav2_params.yaml"),
-        replacements={"/namespace": ("/", namespace)}, #TODO: set if you use namespace or not. 
+        replacements={"/namespace": ""}, #TODO: set if you use namespace or not. 
     )
 
     namespaced_nav2_params = RewrittenYaml(
