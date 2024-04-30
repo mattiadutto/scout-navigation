@@ -62,23 +62,6 @@ def generate_launch_description():
     ]
 
     # Nodes
-    rviz2_node = Node(
-        namespace=namespace,
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        arguments=[
-            "-d",
-            os.path.join(
-                get_package_share_directory(pkg_name),
-                "rviz",
-                "scout_mini_navigation.rviz",
-            ),
-        ],
-        parameters=[{"use_sim_time": use_sim_time}],
-        output="screen",
-        remappings=remapping,
-    )
 
     # robot_localization_local_node = Node(
     #     namespace=namespace,
@@ -275,7 +258,5 @@ def generate_launch_description():
     ld.add_action(nav2_bt_node)
     ld.add_action(nav2_waypoint_follower_node)
     ld.add_action(nav2_lifecycle_manager_node)
-
-    ld.add_action(rviz2_node)
 
     return ld
