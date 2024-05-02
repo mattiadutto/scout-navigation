@@ -11,7 +11,7 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      footprint: "[ [0.290, 0.3075], [0.290, -0.3075], [-0.290, 0.3075], [-0.290, -0.3075] ]" # set on the size of the Scout Mini 615x580mm
+      footprint: "[ [0.54, 0.43], [-0.54, 0.43], [ 0.54, -0.43], [-0.54, -0.43] ]" # set on the size of the Scout Mini 615x580mm
       #plugins: ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
       plugins: [ "voxel_layer", "obstacle_layer", "inflation_layer"]
       static_layer:
@@ -69,7 +69,7 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: True
-      footprint: "[ [0.290, 0.3075], [0.290, -0.3075], [-0.290, 0.3075], [-0.290, -0.3075] ]" # set on the size of the Scout Mini 615x580mm
+      footprint: "[ [0.54, 0.43], [-0.54, 0.43], [ 0.54, -0.43], [-0.54, -0.43]  ]" # set on the size of the Scout Mini 615x580mm
       resolution: 0.05
       track_unknown_space: True
       plugins: ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
@@ -297,7 +297,7 @@ controller_server:
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    progress_checker_plugins: ["progress_checker"] # progress_checker_plugin: "progress_checker" For Humble and older
+    progress_checker_plugins: "progress_checker" # progress_checker_plugin: "progress_checker" For Humble and older
     goal_checker_plugins: ["goal_checker"]
     controller_plugins: ["FollowPath"]
     progress_checker:
@@ -312,9 +312,9 @@ controller_server:
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
       desired_linear_vel: 0.5
-      lookahead_dist: 0.6
-      min_lookahead_dist: 0.3
-      max_lookahead_dist: 0.9
+      lookahead_dist: 1.5
+      min_lookahead_dist: 0.5
+      max_lookahead_dist: 3.0
       lookahead_time: 1.5
       rotate_to_heading_angular_vel: 1.8
       transform_tolerance: 0.1
@@ -451,7 +451,7 @@ amcl:
 map_server:
   ros__parameters:
     use_sim_time: True
-    yaml_filename: "workshop.yaml"
+    yaml_filename: "slam_lab_single_room.yaml"
     topic_name: /namespace/map
     frame_id: map
 
